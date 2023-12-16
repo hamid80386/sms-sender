@@ -2,9 +2,9 @@
 
 namespace hamid80386\SmsSender\Tests;
 
+use hamid80386\SmsSender\SmsSenderServiceProvider;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Orchestra\Testbench\TestCase as Orchestra;
-use hamid80386\SmsSender\SmsSenderServiceProvider;
 
 class TestCase extends Orchestra
 {

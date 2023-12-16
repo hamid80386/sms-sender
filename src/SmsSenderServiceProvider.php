@@ -2,9 +2,9 @@
 
 namespace hamid80386\SmsSender;
 
+use hamid80386\SmsSender\Commands\SmsSenderCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use hamid80386\SmsSender\Commands\SmsSenderCommand;
 
 class SmsSenderServiceProvider extends PackageServiceProvider
 {
