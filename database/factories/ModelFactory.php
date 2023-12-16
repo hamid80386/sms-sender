@@ -1,6 +1,6 @@
 <?php
 
-namespace VendorName\Skeleton\Database\Factories;
+namespace hamid80386\SmsSender\Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 
