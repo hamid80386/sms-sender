@@ -4,9 +4,9 @@ namespace hamid80386\SmsSender;
 
 use hamid80386\SmsSender\Commands\SendSmsCommand;
 use hamid80386\SmsSender\Commands\SmsSenderCommand;
+use Spatie\LaravelPackageTools\Commands\InstallCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use Spatie\LaravelPackageTools\Commands\InstallCommand;
 
 class SmsSenderServiceProvider extends PackageServiceProvider
 {
@@ -25,7 +25,7 @@ class SmsSenderServiceProvider extends PackageServiceProvider
             ->publishesServiceProvider('SmsSenderFacadeServiceProvider')
             ->hasCommand(SmsSenderCommand::class)
             ->hasCommand(SendSmsCommand::class)
-            ->hasInstallCommand(function(InstallCommand $command) {
+            ->hasInstallCommand(function (InstallCommand $command) {
                 $command
                     ->publishConfigFile()
                     ->copyAndRegisterServiceProviderInApp()
