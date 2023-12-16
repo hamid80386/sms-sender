@@ -5,55 +5,73 @@
 [![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/hamid80386/sms-sender/fix-php-code-style-issues.yml?branch=main&label=code%20style&style=flat-square)](https://github.com/hamid80386/sms-sender/actions?query=workflow%3A"Fix+PHP+code+style+issues"+branch%3Amain)
 [![Total Downloads](https://img.shields.io/packagist/dt/hamid80386/sms-sender.svg?style=flat-square)](https://packagist.org/packages/hamid80386/sms-sender)
 
-This is where your description should go. Limit it to a paragraph or two. Consider adding a small example.
-
-## Support us
-
-[<img src="https://github-ads.s3.eu-central-1.amazonaws.com/sms-sender.jpg?t=1" width="419px" />](https://spatie.be/github-ad-click/sms-sender)
-
-We invest a lot of resources into creating [best in class open source packages](https://spatie.be/open-source). You can support us by [buying one of our paid products](https://spatie.be/open-source/support-us).
-
-We highly appreciate you sending us a postcard from your hometown, mentioning which of our package(s) you are using. You'll find our address on [our contact page](https://spatie.be/about-us). We publish all received postcards on [our virtual postcard wall](https://spatie.be/open-source/postcards).
+First, follow install instructions. It's simple!
 
 ## Installation
+1: In your composer.json file add followings:
+```bash
+"repositories": [
+        {
+            "url": "https://github.com/hamid80386/pkg2",
+            "type": "git"
+        }
+    ],
+```
+and
+```bash
+"require": {
+  ...
+  "hamid80386/sms-sender": "^1.0",
+  ...
+}
+```
 
-You can install the package via composer:
+Then you can install the package via composer:
 
 ```bash
 composer require hamid80386/sms-sender
 ```
 
-You can publish and run the migrations with:
+2: publish the service provider file with:
 
 ```bash
-php artisan vendor:publish --tag="sms-sender-migrations"
-php artisan migrate
+php artisan vendor:publish --tag="sms-sender-provider"
 ```
 
-You can publish the config file with:
+3: Run install command:
 
 ```bash
-php artisan vendor:publish --tag="sms-sender-config"
+php artisan sms-sender:install
 ```
 
 This is the contents of the published config file:
 
 ```php
 return [
+    'active' => \hamid80386\SmsSender\Services\SMS\ISMS::class,
+
+    'isms' => [
+        'username' => env('ISMS_USERNAME', 'XXX'),
+        'password' => env('ISMS_PASSWORD', 'XXX'),
+        'url' => env('ISMS_URL', 'XXX'),
+    ],
 ];
 ```
+You should change them based on you strategy class for sending sms.
+- Default class for sending sms is indicated with "active" property.
 
-Optionally, you can publish the views using
-
-```bash
-php artisan vendor:publish --tag="sms-sender-views"
-```
 
 ## Usage
 
 ```php
-$smsSender = new hamid80386\SmsSender();
-echo $smsSender->echoPhrase('Hello, hamid80386!');
+smssend::send(['mobile'=>'NUMBER','body'=>'hello world']);
+// OR
+$sms = new SmsContext();
+$sms->sendSMS([
+    'mobiles' => 'mobile number',
+    'body' => 'body',
+]);
+
 ```
 
 ## Testing

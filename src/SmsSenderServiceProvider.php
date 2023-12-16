@@ -2,9 +2,11 @@
 
 namespace hamid80386\SmsSender;
 
+use hamid80386\SmsSender\Commands\SendSmsCommand;
 use hamid80386\SmsSender\Commands\SmsSenderCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
+use Spatie\LaravelPackageTools\Commands\InstallCommand;
 
 class SmsSenderServiceProvider extends PackageServiceProvider
 {
@@ -20,6 +22,14 @@ class SmsSenderServiceProvider extends PackageServiceProvider
             ->hasConfigFile()
             ->hasViews()
             ->hasMigration('create_sms-sender_table')
-            ->hasCommand(SmsSenderCommand::class);
+            ->publishesServiceProvider('SmsSenderFacadeServiceProvider')
+            ->hasCommand(SmsSenderCommand::class)
+            ->hasCommand(SendSmsCommand::class)
+            ->hasInstallCommand(function(InstallCommand $command) {
+                $command
+                    ->publishConfigFile()
+                    ->copyAndRegisterServiceProviderInApp()
+                    ->askToStarRepoOnGitHub('hamid80386/sms-sender');
+            });
     }
 }

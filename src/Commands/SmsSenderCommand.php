@@ -8,7 +8,7 @@ class SmsSenderCommand extends Command
 {
     public $signature = 'sms-sender';
 
-    public $description = 'My command';
+    public $description = 'Send SMS via console';
 
     public function handle(): int
     {

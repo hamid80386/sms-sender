@@ -1,0 +1,18 @@
+<?php
+namespace App\Providers;
+
+use App;
+use hamid80386\SmsSender\Facades\SmsControl;
+use hamid80386\SmsSender\Facades\SmsSender;
+use Illuminate\Support\ServiceProvider;
+class SmsSenderFacadeServiceProvider{
+    public function boot() {
+        //
+    }
+    public function register() {
+        App::bind('smssender',function() {
+            return new SmsControl();
+        });
+    }
+
+}
